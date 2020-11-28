@@ -388,8 +388,6 @@ struct StringFNStrings stringfn_split(char *string, char separator)
       strings_struct.strings[strings_struct.count] = strdup("");
     }
     strings_struct.count++;
-
-    strings_struct.strings[strings_struct.count] = '\0';
   }
 
   return(strings_struct);

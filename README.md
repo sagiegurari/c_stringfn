@@ -14,8 +14,7 @@
 
 <a name="overview"></a>
 ## Overview
-This library provides many string related functions that you always were looking for but are missing
-in the C standard library.
+This library provides many string related functions that you always looked for and are missing in the C standard library.
 
 <a name="usage"></a>
 ## Usage
