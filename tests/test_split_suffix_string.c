@@ -10,6 +10,8 @@ void test_impl()
   assert_string_equal(strings.strings[0], "ab");
   assert_string_equal(strings.strings[1], "");
 
+  free(strings.strings[0]);
+  free(strings.strings[1]);
   free(strings.strings);
 }
 
