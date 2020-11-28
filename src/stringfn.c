@@ -82,17 +82,9 @@ char *stringfn_mut_trim_start(char *string)
     return(NULL);
   }
 
-  size_t len = strlen(string);
-  if (!len)
-  {
-    return(string);
-  }
-
-  size_t counter = 0;
-  while (isspace(*string) && (counter < len))
+  while (isspace(*string))
   {
     string++;
-    counter++;
   }
 
   return(string);
@@ -114,7 +106,7 @@ char *stringfn_mut_trim_end(char *string)
 
   char   *end_ptr = string + len - 1;
   size_t counter  = 0;
-  while (isspace(*end_ptr) && (counter < len))
+  while ((counter < len) && isspace(*end_ptr))
   {
     end_ptr--;
     counter++;
