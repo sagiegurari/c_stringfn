@@ -82,9 +82,17 @@ char *stringfn_mut_trim_start(char *string)
     return(NULL);
   }
 
-  while (isspace(*string))
+  size_t len = strlen(string);
+  if (!len)
+  {
+    return(string);
+  }
+
+  size_t counter = 0;
+  while (isspace(*string) && (counter < len))
   {
     string++;
+    counter++;
   }
 
   return(string);
@@ -104,10 +112,12 @@ char *stringfn_mut_trim_end(char *string)
     return(string);
   }
 
-  char *end_ptr = string + len - 1;
-  while (isspace(*end_ptr))
+  char   *end_ptr = string + len - 1;
+  size_t counter  = 0;
+  while (isspace(*end_ptr) && (counter < len))
   {
     end_ptr--;
+    counter++;
   }
   *(end_ptr + 1) = '\0';
 
