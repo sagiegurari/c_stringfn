@@ -457,9 +457,14 @@ char *_stringfn_trim(const char *string, bool trim_start, bool trim_end)
     }
   }
 
-  len = end - start + 2;
-  char *trimmed = malloc(sizeof(char) * len);
-  memcpy(trimmed, &string[start], len - 1);
+  len = end - start + 1;
+  if (!len)
+  {
+    return(strdup(""));
+  }
+
+  char *trimmed = malloc(sizeof(char) * (len + 1));
+  memcpy(trimmed, &string[start], len);
   trimmed[len] = '\0';
 
   return(trimmed);
