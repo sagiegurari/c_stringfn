@@ -45,7 +45,7 @@ void assert_signed_num_equal(int value1, int value2)
   if (value1 != value2)
   {
 #ifdef linux
-    printf("Assert Failed, value: %zu not equals to value: %zu", value1, value2);
+    printf("Assert Failed, value: %d not equals to value: %d", value1, value2);
 #endif
     test_fail();
   }
