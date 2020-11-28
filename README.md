@@ -27,9 +27,11 @@ This library provides many string related functions that you always looked for a
 
 int main()
 {
-  bool result = stringfn_starts_with("my long text", "my");
+  printf("Library Examples:\n");
 
+  bool result = stringfn_starts_with("my long text", "my");
   printf("Starts With: %d\n", result);
+
   result = stringfn_ends_with("my long text", "text");
   printf("Ends With: %d\n", result);
 
