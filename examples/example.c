@@ -90,8 +90,8 @@ int main()
   printf("Strings Count: %d\n%s and %s and %s\n", strings_struct.count, strings_struct.strings[0], strings_struct.strings[1], strings_struct.strings[2]);
   stringfn_release_strings_struct(strings_struct);
 
-  strings_struct = stringfn_split_words("word1 2 3   another\nlast");
-  printf("Strings Count: %d\n%s and %s and %s\n", strings_struct.count, strings_struct.strings[0], strings_struct.strings[1], strings_struct.strings[2]);
+  strings_struct = stringfn_split_words("word1 2 3   another \tlast");
+  printf("Strings Count: %d\n%s and %s and %s and %s and %s\n", strings_struct.count, strings_struct.strings[0], strings_struct.strings[1], strings_struct.strings[2], strings_struct.strings[3], strings_struct.strings[4]);
   stringfn_release_strings_struct(strings_struct);
 
   return(0);
