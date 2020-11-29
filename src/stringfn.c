@@ -412,6 +412,20 @@ struct StringFNStrings stringfn_split_lines(char *string)
   return(stringfn_split(string, '\n'));
 }
 
+struct StringFNStrings stringfn_split_lines_and_trim(char *string)
+{
+  struct StringFNStrings strings = stringfn_split_lines(string);
+
+  for (int index = 0; index < strings.count; index++)
+  {
+    char *line = strings.strings[index];
+    strings.strings[index] = stringfn_trim(line);
+    free(line);
+  }
+
+  return(strings);
+}
+
 
 char *_stringfn_clone_substring(const char *string, size_t start, size_t size)
 {
