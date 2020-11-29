@@ -5,6 +5,7 @@
 
 char *_stringfn_clone_substring(const char *, size_t, size_t);
 char *_stringfn_trim(const char *, bool, bool);
+bool _stringfn_is_whitespace(char);
 
 
 bool stringfn_equal(const char *string1, const char *string2)
@@ -93,7 +94,7 @@ char *stringfn_mut_trim_start(char *string)
     return(NULL);
   }
 
-  while (isspace(*string))
+  while (_stringfn_is_whitespace(*string))
   {
     string++;
   }
@@ -117,7 +118,7 @@ char *stringfn_mut_trim_end(char *string)
 
   char   *end_ptr = string + len - 1;
   size_t counter  = 0;
-  while ((counter < len) && isspace(*end_ptr))
+  while ((counter < len) && _stringfn_is_whitespace(*end_ptr))
   {
     end_ptr--;
     counter++;
@@ -446,7 +447,7 @@ char *_stringfn_trim(const char *string, bool trim_start, bool trim_end)
     bool found = false;
     for (size_t index = 0; index < len; index++)
     {
-      if (!isspace(string[index]))
+      if (!_stringfn_is_whitespace(string[index]))
       {
         found = true;
         start = index;
@@ -465,7 +466,7 @@ char *_stringfn_trim(const char *string, bool trim_start, bool trim_end)
   {
     for (size_t index = len - 1; index >= start; index--)
     {
-      if (!isspace(string[index]))
+      if (!_stringfn_is_whitespace(string[index]))
       {
         end = index;
         break;
@@ -485,4 +486,10 @@ char *_stringfn_trim(const char *string, bool trim_start, bool trim_end)
 
   return(trimmed);
 } /* _stringfn_trim */
+
+
+bool _stringfn_is_whitespace(char character)
+{
+  return(isspace(character) || character == '\r' || character == '\n' || character == '\t');
+}
 

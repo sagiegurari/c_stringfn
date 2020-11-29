@@ -125,5 +125,12 @@ struct StringFNStrings stringfn_split(char *, char);
  */
 struct StringFNStrings stringfn_split_lines(char *);
 
+/**
+ * Splits the provided string into a new string array of newly allocated strings per line.
+ * Each line will be trimmed.
+ * Once done, the strings array and strings must be released.
+ */
+struct StringFNStrings stringfn_split_lines_and_trim(char *);
+
 #endif
 
