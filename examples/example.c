@@ -85,6 +85,13 @@ int main()
   free(strings_struct.strings[2]);
   free(strings_struct.strings);
 
+  strings_struct = stringfn_split_lines("first line\nsecond line\n3rd");
+  printf("Strings Count: %d\n%s and %s and %s\n", strings_struct.count, strings_struct.strings[0], strings_struct.strings[1], strings_struct.strings[2]);
+  free(strings_struct.strings[0]);
+  free(strings_struct.strings[1]);
+  free(strings_struct.strings[2]);
+  free(strings_struct.strings);
+
   return(0);
 } /* main */
 

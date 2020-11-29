@@ -406,6 +406,11 @@ struct StringFNStrings stringfn_split(char *string, char separator)
   return(strings_struct);
 } /* stringfn_split */
 
+struct StringFNStrings stringfn_split_lines(char *string)
+{
+  return(stringfn_split(string, '\n'));
+}
+
 
 char *_stringfn_clone_substring(const char *string, size_t start, size_t size)
 {
