@@ -8,6 +8,8 @@ void test_impl()
 
   assert_signed_num_equal(strings.count, -1);
   assert_true(strings.strings == NULL);
+
+  stringfn_release_strings_struct(strings);
 }
 
 

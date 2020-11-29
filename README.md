@@ -102,17 +102,15 @@ int main()
 
   struct StringFNStrings strings_struct = stringfn_split("first line\nsecond line\n3rd", '\n');
   printf("Strings Count: %d\n%s and %s and %s\n", strings_struct.count, strings_struct.strings[0], strings_struct.strings[1], strings_struct.strings[2]);
-  free(strings_struct.strings[0]);
-  free(strings_struct.strings[1]);
-  free(strings_struct.strings[2]);
-  free(strings_struct.strings);
+  stringfn_release_strings_struct(strings_struct);
 
   strings_struct = stringfn_split_lines("first line\nsecond line\n3rd");
   printf("Strings Count: %d\n%s and %s and %s\n", strings_struct.count, strings_struct.strings[0], strings_struct.strings[1], strings_struct.strings[2]);
-  free(strings_struct.strings[0]);
-  free(strings_struct.strings[1]);
-  free(strings_struct.strings[2]);
-  free(strings_struct.strings);
+  stringfn_release_strings_struct(strings_struct);
+
+  strings_struct = stringfn_split_lines_and_trim("  first line  \n\tsecond line\t\n  3rd");
+  printf("Strings Count: %d\n%s and %s and %s\n", strings_struct.count, strings_struct.strings[0], strings_struct.strings[1], strings_struct.strings[2]);
+  stringfn_release_strings_struct(strings_struct);
 
   return(0);
 } /* main */

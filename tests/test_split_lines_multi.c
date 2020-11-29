@@ -11,10 +11,7 @@ void test_impl()
   assert_string_equal(strings.strings[1], "321");
   assert_string_equal(strings.strings[2], "123");
 
-  free(strings.strings[0]);
-  free(strings.strings[1]);
-  free(strings.strings[2]);
-  free(strings.strings);
+  stringfn_release_strings_struct(strings);
 }
 
 

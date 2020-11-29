@@ -427,6 +427,25 @@ struct StringFNStrings stringfn_split_lines_and_trim(char *string)
 }
 
 
+void stringfn_release_strings_struct(struct StringFNStrings strings)
+{
+  if (strings.count < 0 || strings.strings == NULL)
+  {
+    return;
+  }
+
+  for (int index = 0; index < strings.count; index++)
+  {
+    if (strings.strings[index] != NULL)
+    {
+      free(strings.strings[index]);
+    }
+  }
+
+  free(strings.strings);
+}
+
+
 char *_stringfn_clone_substring(const char *string, size_t start, size_t size)
 {
   char *target = malloc(sizeof(char) * (size + 1));

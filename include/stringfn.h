@@ -132,5 +132,10 @@ struct StringFNStrings stringfn_split_lines(char *);
  */
 struct StringFNStrings stringfn_split_lines_and_trim(char *);
 
+/**
+ * Release utility function.
+ */
+void stringfn_release_strings_struct(struct StringFNStrings);
+
 #endif
 

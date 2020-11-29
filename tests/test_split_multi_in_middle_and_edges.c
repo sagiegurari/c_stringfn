@@ -13,12 +13,7 @@ void test_impl()
   assert_string_equal(strings.strings[3], "123");
   assert_string_equal(strings.strings[4], "");
 
-  free(strings.strings[0]);
-  free(strings.strings[1]);
-  free(strings.strings[2]);
-  free(strings.strings[3]);
-  free(strings.strings[4]);
-  free(strings.strings);
+  stringfn_release_strings_struct(strings);
 }
 
 
