@@ -29,7 +29,10 @@ int main()
 {
   printf("Library Examples:\n");
 
-  bool result = stringfn_starts_with("my long text", "my");
+  bool result = stringfn_equal("test", "test");
+  printf("Strings Same: %d\n", result);
+
+  result = stringfn_starts_with("my long text", "my");
   printf("Starts With: %d\n", result);
 
   result = stringfn_ends_with("my long text", "text");

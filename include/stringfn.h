@@ -11,6 +11,12 @@ struct StringFNStrings
 };
 
 /**
+ * Returns true if both strings are equal.
+ * If any string is NULL, false will be returned.
+ */
+bool stringfn_equal(const char *, const char *);
+
+/**
  * Returns true if the provided prefix is found at the start of the given string.
  */
 bool stringfn_starts_with(const char * /* string */, const char * /* prefix */);

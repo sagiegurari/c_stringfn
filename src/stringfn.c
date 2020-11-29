@@ -7,6 +7,17 @@ char *_stringfn_clone_substring(const char *, size_t, size_t);
 char *_stringfn_trim(const char *, bool, bool);
 
 
+bool stringfn_equal(const char *string1, const char *string2)
+{
+  if (string1 == NULL || string2 == NULL)
+  {
+    return(false);
+  }
+
+  return(strcmp(string1, string2) == 0);
+}
+
+
 bool stringfn_starts_with(const char *string, const char *prefix)
 {
   if (string == NULL || prefix == NULL)
