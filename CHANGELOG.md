@@ -1,6 +1,6 @@
 ## CHANGELOG
 
-### v0.1.1
+### v0.1.1 (2020-11-29)
 
 * New stringfn_split_lines function.
 * New stringfn_split_lines_and_trim function.
