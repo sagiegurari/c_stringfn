@@ -144,6 +144,12 @@ struct StringFNStrings stringfn_split_lines(char *);
 struct StringFNStrings stringfn_split_lines_and_trim(char *);
 
 /**
+ * Splits the provided string into a new string array of words.
+ * Once done, the strings array and strings must be released.
+ */
+struct StringFNStrings stringfn_split_words(char *);
+
+/**
  * Release utility function.
  */
 void stringfn_release_strings_struct(struct StringFNStrings);

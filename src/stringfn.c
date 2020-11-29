@@ -441,6 +441,50 @@ struct StringFNStrings stringfn_split_lines_and_trim(char *string)
   return(strings);
 }
 
+struct StringFNStrings stringfn_split_words(char *string)
+{
+  struct StringFNStrings strings = stringfn_split(string, ' ');
+
+  if (strings.count < 0)
+  {
+    return(strings);
+  }
+
+  int count = 0;
+  for (int index = 0; index < strings.count; index++)
+  {
+    char *word = strings.strings[index];
+    strings.strings[index] = stringfn_trim(word);
+    free(word);
+
+    if (strlen(strings.strings[index]))
+    {
+      count++;
+    }
+    else
+    {
+      free(strings.strings[index]);
+      strings.strings[index] = NULL;
+    }
+  }
+
+  struct StringFNStrings words;
+  words.count   = 0;
+  words.strings = malloc(sizeof(char *) * (unsigned int)count);
+  for (int index = 0; index < strings.count; index++)
+  {
+    if (strings.strings[index] != NULL)
+    {
+      words.strings[words.count] = strings.strings[index];
+      words.count++;
+    }
+  }
+
+  free(strings.strings);
+
+  return(words);
+} /* stringfn_split_words */
+
 
 void stringfn_release_strings_struct(struct StringFNStrings strings)
 {
