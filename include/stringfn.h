@@ -11,6 +11,12 @@ struct StringFNStrings
 };
 
 /**
+ * Returns new dynamically allocated empty string.
+ * Once done, this char array must be released.
+ */
+char *stringfn_new_empty_string();
+
+/**
  * Returns true if both strings are equal.
  * If any string is NULL, false will be returned.
  */
@@ -25,6 +31,11 @@ bool stringfn_starts_with(const char * /* string */, const char * /* prefix */);
  * Returns true if the provided suffix is found at the end of the given string.
  */
 bool stringfn_ends_with(const char * /* string */, const char * /* suffix */);
+
+/**
+ * Returns true if the char is a whitespace char: space, EOL, CR.
+ */
+bool stringfn_is_whitespace(char);
 
 /**
  * Trims all whitespaces and returns a new char array.

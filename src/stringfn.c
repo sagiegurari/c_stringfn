@@ -5,7 +5,16 @@
 
 char *_stringfn_clone_substring(const char *, size_t, size_t);
 char *_stringfn_trim(const char *, bool, bool);
-bool _stringfn_is_whitespace(char);
+
+
+char *stringfn_new_empty_string()
+{
+  char *string = malloc(sizeof(char));
+
+  string[0] = '\0';
+
+  return(string);
+}
 
 
 bool stringfn_equal(const char *string1, const char *string2)
@@ -61,6 +70,12 @@ bool stringfn_ends_with(const char *string, const char *suffix)
 }
 
 
+bool stringfn_is_whitespace(char character)
+{
+  return(isspace(character) || character == '\r' || character == '\n' || character == '\t');
+}
+
+
 char *stringfn_trim(const char *string)
 {
   return(_stringfn_trim(string, true, true));
@@ -94,7 +109,7 @@ char *stringfn_mut_trim_start(char *string)
     return(NULL);
   }
 
-  while (_stringfn_is_whitespace(*string))
+  while (stringfn_is_whitespace(*string))
   {
     string++;
   }
@@ -118,7 +133,7 @@ char *stringfn_mut_trim_end(char *string)
 
   char   *end_ptr = string + len - 1;
   size_t counter  = 0;
-  while ((counter < len) && _stringfn_is_whitespace(*end_ptr))
+  while ((counter < len) && stringfn_is_whitespace(*end_ptr))
   {
     end_ptr--;
     counter++;
@@ -399,7 +414,7 @@ struct StringFNStrings stringfn_split(char *string, char separator)
     }
     else
     {
-      strings_struct.strings[strings_struct.count] = strdup("");
+      strings_struct.strings[strings_struct.count] = stringfn_new_empty_string();
     }
     strings_struct.count++;
   }
@@ -471,7 +486,7 @@ char *_stringfn_trim(const char *string, bool trim_start, bool trim_end)
   size_t len = strlen(string);
   if (!len)
   {
-    return(strdup(""));
+    return(stringfn_new_empty_string());
   }
 
   size_t start = 0;
@@ -480,7 +495,7 @@ char *_stringfn_trim(const char *string, bool trim_start, bool trim_end)
     bool found = false;
     for (size_t index = 0; index < len; index++)
     {
-      if (!_stringfn_is_whitespace(string[index]))
+      if (!stringfn_is_whitespace(string[index]))
       {
         found = true;
         start = index;
@@ -490,7 +505,7 @@ char *_stringfn_trim(const char *string, bool trim_start, bool trim_end)
 
     if (!found)
     {
-      return(strdup(""));
+      return(stringfn_new_empty_string());
     }
   }
 
@@ -499,7 +514,7 @@ char *_stringfn_trim(const char *string, bool trim_start, bool trim_end)
   {
     for (size_t index = len - 1; index >= start; index--)
     {
-      if (!_stringfn_is_whitespace(string[index]))
+      if (!stringfn_is_whitespace(string[index]))
       {
         end = index;
         break;
@@ -510,7 +525,7 @@ char *_stringfn_trim(const char *string, bool trim_start, bool trim_end)
   len = end - start + 1;
   if (!len)
   {
-    return(strdup(""));
+    return(stringfn_new_empty_string());
   }
 
   char *trimmed = malloc(sizeof(char) * (len + 1));
@@ -519,10 +534,4 @@ char *_stringfn_trim(const char *string, bool trim_start, bool trim_end)
 
   return(trimmed);
 } /* _stringfn_trim */
-
-
-bool _stringfn_is_whitespace(char character)
-{
-  return(isspace(character) || character == '\r' || character == '\n' || character == '\t');
-}
 
