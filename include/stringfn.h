@@ -38,6 +38,33 @@ bool stringfn_ends_with(const char * /* string */, const char * /* suffix */);
 bool stringfn_is_whitespace(char);
 
 /**
+ * Returns true if the provided string contains only digit (0-9) characters.
+ */
+bool stringfn_is_digits(const char *);
+
+/**
+ * Returns true if the provided string contains only ASCII characters.
+ */
+bool stringfn_is_ascii(const char *);
+
+/**
+ * Returns a new substring from the provided string.
+ * If the start value is negative, it will define the location from the end of the provided string.
+ * If length is 0, it will continue from start until end of string.
+ * If the values are out of range, NULL will be returned.
+ * Once done, this char array must be released.
+ */
+char *stringfn_substring(const char *, int /* start */, size_t /* length */);
+
+/**
+ * Returns a substring by modifying the provided string.
+ * If the start value is negative, it will define the location from the end of the provided string.
+ * If length is 0, it will continue from start until end of string.
+ * If the values are out of range, NULL will be returned.
+ */
+char *stringfn_mut_substring(char *, int /* start */, size_t /* length */);
+
+/**
  * Trims all whitespaces and returns a new char array.
  * Once done, this char array must be released.
  */

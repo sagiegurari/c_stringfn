@@ -3,7 +3,16 @@
 #include <string.h>
 
 
+struct StringFNSubStringIndex
+{
+  size_t start;
+  size_t end;
+  size_t length;
+  bool   valid;
+};
+
 char *_stringfn_clone_substring(const char *, size_t, size_t);
+struct StringFNSubStringIndex _stringfn_get_substring_index(const char *, int, size_t);
 char *_stringfn_trim(const char *, bool, bool);
 
 
@@ -73,6 +82,88 @@ bool stringfn_ends_with(const char *string, const char *suffix)
 bool stringfn_is_whitespace(char character)
 {
   return(isspace(character) || character == '\r' || character == '\n' || character == '\t');
+}
+
+
+bool stringfn_is_digits(const char *string)
+{
+  if (string == NULL)
+  {
+    return(false);
+  }
+
+  size_t length = strlen(string);
+  if (!length)
+  {
+    return(false);
+  }
+
+  for (size_t index = 0; index < length; index++)
+  {
+    if (!isdigit(string[index]))
+    {
+      return(false);
+    }
+  }
+
+  return(true);
+}
+
+
+bool stringfn_is_ascii(const char *string)
+{
+  if (string == NULL)
+  {
+    return(false);
+  }
+
+  size_t length = strlen(string);
+  if (!length)
+  {
+    return(false);
+  }
+
+  for (size_t index = 0; index < length; index++)
+  {
+    if (!isascii(string[index]))
+    {
+      return(false);
+    }
+  }
+
+  return(true);
+}
+
+
+char *stringfn_substring(const char *string, int start, size_t length)
+{
+  struct StringFNSubStringIndex sub_string_index = _stringfn_get_substring_index(string, start, length);
+
+  if (!sub_string_index.valid)
+  {
+    return(NULL);
+  }
+
+  char *substring = _stringfn_clone_substring(string, sub_string_index.start, sub_string_index.length);
+
+  return(substring);
+}
+
+
+char *stringfn_mut_substring(char *string, int start, size_t length)
+{
+  struct StringFNSubStringIndex sub_string_index = _stringfn_get_substring_index(string, start, length);
+
+  if (!sub_string_index.valid)
+  {
+    return(NULL);
+  }
+
+  char *substring = &string[sub_string_index.start];
+  char *end       = &string[sub_string_index.end];
+  *end = '\0';
+
+  return(substring);
 }
 
 
@@ -505,19 +596,78 @@ void stringfn_release_strings_struct(struct StringFNStrings strings)
 }
 
 
-char *_stringfn_clone_substring(const char *string, size_t start, size_t size)
+char *_stringfn_clone_substring(const char *string, size_t start, size_t length)
 {
-  char *target = malloc(sizeof(char) * (size + 1));
+  if (!length)
+  {
+    return(strdup(""));
+  }
 
-  for (size_t index = 0; index < size; index++)
+  char *target = malloc(sizeof(char) * (length + 1));
+
+  for (size_t index = 0; index < length; index++)
   {
     target[index] = string[start + index];
   }
 
-  target[size] = '\0';
+  target[length] = '\0';
 
   return(target);
 }
+
+struct StringFNSubStringIndex _stringfn_get_substring_index(const char *string, int start, size_t length)
+{
+  struct StringFNSubStringIndex sub_string_index;
+
+  sub_string_index.start  = 0;
+  sub_string_index.end    = 0;
+  sub_string_index.length = 0;
+  sub_string_index.valid  = false;
+
+  if (string == NULL)
+  {
+    return(sub_string_index);
+  }
+
+  size_t max_length          = strlen(string);
+  int    unsigned_max_length = (int)max_length;
+  size_t start_index         = 0;
+  if (start > 0)
+  {
+    if (start >= unsigned_max_length)
+    {
+      return(sub_string_index);
+    }
+    start_index = (size_t)start;
+  }
+  else if (start < 0)
+  {
+    int value = unsigned_max_length + start;
+    if (value < 0)
+    {
+      return(sub_string_index);
+    }
+
+    start_index = (size_t)value;
+  }
+
+  size_t end_index = start_index + length;
+  if (end_index > max_length)
+  {
+    return(sub_string_index);
+  }
+  if (!length)
+  {
+    end_index = max_length;
+  }
+
+  sub_string_index.start  = start_index;
+  sub_string_index.end    = end_index;
+  sub_string_index.length = end_index - start_index;
+  sub_string_index.valid  = true;
+
+  return(sub_string_index);
+} /* _stringfn_get_substring_index */
 
 
 char *_stringfn_trim(const char *string, bool trim_start, bool trim_end)

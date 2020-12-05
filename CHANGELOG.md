@@ -1,5 +1,12 @@
 ## CHANGELOG
 
+### v0.1.2
+
+* New stringfn_is_digits function.
+* New stringfn_is_ascii function.
+* New stringfn_substring function.
+* New stringfn_mut_substring function.
+
 ### v0.1.1 (2020-11-29)
 
 * New stringfn_split_lines function.
