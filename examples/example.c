@@ -16,7 +16,20 @@ int main()
   result = stringfn_ends_with("my long text", "text");
   printf("Ends With: %d\n", result);
 
-  char *string = stringfn_trim("  value  ");
+  result = stringfn_is_digits("12345");
+  printf("All Digits: %d\n", result);
+
+  result = stringfn_is_ascii("19aAzZ!@#$%^&*()");
+  printf("All Ascii: %d\n", result);
+
+  char *string = stringfn_substring("hello world", 6, 0);
+  printf("Sub String: %s\n", string);
+  string = stringfn_substring("hello world", -5, 0);
+  printf("Sub String: %s\n", string);
+  string = stringfn_substring("hello world", 0, 5);
+  printf("Sub String: %s\n", string);
+
+  string = stringfn_trim("  value  ");
   printf("Trimmed: %s\n", string);
   free(string);
   string = stringfn_trim_start("  value  ");

@@ -1,6 +1,6 @@
 ## CHANGELOG
 
-### v0.1.2
+### v0.1.2 (2020-12-05)
 
 * New stringfn_is_digits function.
 * New stringfn_is_ascii function.
