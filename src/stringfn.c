@@ -464,51 +464,60 @@ struct StringFNStrings stringfn_split(char *string, char separator)
   strings_struct.strings = NULL;
   strings_struct.count   = -1;
 
-  if (string != NULL)
+  if (string == NULL)
   {
-    size_t len = strlen(string);
+    return(strings_struct);
+  }
 
-    size_t counter = 1;
-    for (size_t index = 0; index < len; index++)
+  size_t len = strlen(string);
+  if (!len)
+  {
+    strings_struct.strings    = malloc(sizeof(char *));
+    strings_struct.strings[0] = stringfn_new_empty_string();
+    strings_struct.count      = 1;
+    return(strings_struct);
+  }
+
+  size_t counter = 1;
+  for (size_t index = 0; index < len; index++)
+  {
+    if (string[index] == separator)
     {
-      if (string[index] == separator)
-      {
-        counter++;
-      }
+      counter++;
     }
+  }
 
-    strings_struct.strings = malloc(sizeof(char *) * (counter + 1));
+  strings_struct.strings = malloc(sizeof(char *) * (counter + 1));
 
-    counter              = 0;
-    strings_struct.count = 0;
-    for (size_t index = 0; index < len; index++)
+  counter              = 0;
+  strings_struct.count = 0;
+  for (size_t index = 0; index < len; index++)
+  {
+    if (string[index] == separator)
     {
-      if (string[index] == separator)
-      {
-        char *sub_string = _stringfn_clone_substring(string, index - counter, counter);
-
-        strings_struct.strings[strings_struct.count] = sub_string;
-        strings_struct.count++;
-
-        counter = 0;
-      }
-      else
-      {
-        counter++;
-      }
-    }
-    if (string[len - 1] != separator)
-    {
-      char *sub_string = _stringfn_clone_substring(string, len - counter, counter);
+      char *sub_string = _stringfn_clone_substring(string, index - counter, counter);
 
       strings_struct.strings[strings_struct.count] = sub_string;
+      strings_struct.count++;
+
+      counter = 0;
     }
     else
     {
-      strings_struct.strings[strings_struct.count] = stringfn_new_empty_string();
+      counter++;
     }
-    strings_struct.count++;
   }
+  if (string[len - 1] != separator)
+  {
+    char *sub_string = _stringfn_clone_substring(string, len - counter, counter);
+
+    strings_struct.strings[strings_struct.count] = sub_string;
+  }
+  else
+  {
+    strings_struct.strings[strings_struct.count] = stringfn_new_empty_string();
+  }
+  strings_struct.count++;
 
   return(strings_struct);
 } /* stringfn_split */

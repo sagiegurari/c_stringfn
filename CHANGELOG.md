@@ -1,5 +1,9 @@
 ## CHANGELOG
 
+### v0.1.3 (2021-02-15)
+
+* Fixed memory access issue in split function for empty strings.
+
 ### v0.1.2 (2020-12-05)
 
 * New stringfn_is_digits function.
