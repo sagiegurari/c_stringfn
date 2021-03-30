@@ -1,5 +1,9 @@
 ## CHANGELOG
 
+### v0.1.4
+
+* Added cargo-make makefile for simpler sharing of optional development build instructions.
+
 ### v0.1.3 (2021-02-15)
 
 * Fixed memory access issue in split function for empty strings.
