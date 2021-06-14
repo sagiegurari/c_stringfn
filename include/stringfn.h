@@ -14,7 +14,7 @@ struct StringFNStrings
  * Returns new dynamically allocated empty string.
  * Once done, this char array must be released.
  */
-char *stringfn_new_empty_string();
+char *stringfn_new_empty_string(void);
 
 /**
  * Returns true if both strings are equal.
