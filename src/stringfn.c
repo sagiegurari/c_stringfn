@@ -633,17 +633,26 @@ char *stringfn_vformat(const char *format, va_list args)
     return(stringfn_new_empty_string());
   }
 
+  va_list args_clone;
+  va_copy(args_clone, args);
+
   int length = vsnprintf(NULL, 0, format, args);
 
-  if (length <= 0)
+  if (length < 0)
+  {
+    return(NULL);
+  }
+  if (!length)
   {
     return(stringfn_new_empty_string());
   }
 
   size_t length_size = (size_t)length;
   char   *buffer     = malloc(sizeof(char) * (length_size + 1));
+  vsnprintf(buffer, length_size + 1, format, args_clone);
   buffer[length_size] = '\0';
-  vsnprintf(buffer, length_size + 1, format, args);
+
+  va_end(args_clone);
 
   return(buffer);
 }
