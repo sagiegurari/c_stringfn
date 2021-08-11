@@ -1,7 +1,8 @@
 ## CHANGELOG
 
-### v0.1.4
+### v0.1.4 (2021-08-11)
 
+* New stringfn_format and stringfn_vformat functions.
 * Added void to no arg functions
 * Added cargo-make makefile for simpler sharing of optional development build instructions.
 

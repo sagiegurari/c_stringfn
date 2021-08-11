@@ -1,6 +1,7 @@
 #ifndef __STRINGFN_H__
 #define __STRINGFN_H__
 
+#include <stdarg.h>
 #include <stdbool.h>
 #include <stdlib.h>
 
@@ -180,6 +181,20 @@ struct StringFNStrings stringfn_split_words(char *);
  * Release utility function.
  */
 void stringfn_release_strings_struct(struct StringFNStrings);
+
+/**
+ * Similar to snprintf but this function will allocate the output
+ * string in the needed size and return it.
+ * Once done, the returned string should be released.
+ */
+char *stringfn_format(const char *, ...);
+
+/**
+ * Similar to vsnprintf but this function will allocate the output
+ * string in the needed size and return it.
+ * Once done, the returned string should be released.
+ */
+char *stringfn_vformat(const char *, va_list);
 
 #endif
 

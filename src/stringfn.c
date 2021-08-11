@@ -1,5 +1,6 @@
 #include "stringfn.h"
 #include <ctype.h>
+#include <stdio.h>
 #include <string.h>
 
 
@@ -605,11 +606,54 @@ void stringfn_release_strings_struct(struct StringFNStrings strings)
 }
 
 
+char *stringfn_format(const char *format, ...)
+{
+  if (format == NULL)
+  {
+    return(NULL);
+  }
+  va_list args;
+
+  va_start(args, format);
+  char *output = stringfn_vformat(format, args);
+  va_end(args);
+
+  return(output);
+}
+
+
+char *stringfn_vformat(const char *format, va_list args)
+{
+  if (format == NULL)
+  {
+    return(NULL);
+  }
+  if (!strlen(format))
+  {
+    return(stringfn_new_empty_string());
+  }
+
+  int length = vsnprintf(NULL, 0, format, args);
+
+  if (length <= 0)
+  {
+    return(stringfn_new_empty_string());
+  }
+
+  size_t length_size = (size_t)length;
+  char   *buffer     = malloc(sizeof(char) * (length_size + 1));
+  buffer[length_size] = '\0';
+  vsnprintf(buffer, length_size + 1, format, args);
+
+  return(buffer);
+}
+
+
 char *_stringfn_clone_substring(const char *string, size_t start, size_t length)
 {
   if (!length)
   {
-    return(strdup(""));
+    return(stringfn_new_empty_string());
   }
 
   char *target = malloc(sizeof(char) * (length + 1));
