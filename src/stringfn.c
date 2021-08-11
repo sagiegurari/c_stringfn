@@ -635,15 +635,19 @@ char *stringfn_vformat(const char *format, va_list args)
 
   int length = vsnprintf(NULL, 0, format, args);
 
-  if (length <= 0)
+  if (length < 0)
+  {
+    return(NULL);
+  }
+  if (!length)
   {
     return(stringfn_new_empty_string());
   }
 
   size_t length_size = (size_t)length;
   char   *buffer     = malloc(sizeof(char) * (length_size + 1));
-  buffer[length_size] = '\0';
   vsnprintf(buffer, length_size + 1, format, args);
+  buffer[length_size] = '\0';
 
   return(buffer);
 }

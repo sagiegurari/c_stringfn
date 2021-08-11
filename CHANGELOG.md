@@ -1,6 +1,6 @@
 ## CHANGELOG
 
-### v0.1.4 (2021-08-11)
+### v0.1.4
 
 * New stringfn_format and stringfn_vformat functions.
 * Added void to no arg functions
