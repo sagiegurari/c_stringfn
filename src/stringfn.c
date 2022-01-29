@@ -12,9 +12,9 @@ struct StringFNSubStringIndex
   bool   valid;
 };
 
-char *_stringfn_clone_substring(const char *, size_t, size_t);
-struct StringFNSubStringIndex _stringfn_get_substring_index(const char *, int, size_t);
-char *_stringfn_trim(const char *, bool, bool);
+static char *_stringfn_clone_substring(const char *, size_t, size_t);
+static struct StringFNSubStringIndex _stringfn_get_substring_index(const char *, int, size_t);
+static char *_stringfn_trim(const char *, bool, bool);
 
 
 char *stringfn_new_empty_string()
@@ -658,7 +658,7 @@ char *stringfn_vformat(const char *format, va_list args)
 }
 
 
-char *_stringfn_clone_substring(const char *string, size_t start, size_t length)
+static char *_stringfn_clone_substring(const char *string, size_t start, size_t length)
 {
   if (!length)
   {
@@ -677,7 +677,7 @@ char *_stringfn_clone_substring(const char *string, size_t start, size_t length)
   return(target);
 }
 
-struct StringFNSubStringIndex _stringfn_get_substring_index(const char *string, int start, size_t length)
+static struct StringFNSubStringIndex _stringfn_get_substring_index(const char *string, int start, size_t length)
 {
   struct StringFNSubStringIndex sub_string_index;
 
@@ -732,7 +732,7 @@ struct StringFNSubStringIndex _stringfn_get_substring_index(const char *string, 
 } /* _stringfn_get_substring_index */
 
 
-char *_stringfn_trim(const char *string, bool trim_start, bool trim_end)
+static char *_stringfn_trim(const char *string, bool trim_start, bool trim_end)
 {
   if (string == NULL)
   {
