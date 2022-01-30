@@ -1,8 +1,10 @@
 ## CHANGELOG
 
-### v0.1.5
+### v0.1.5 (2022-01-30)
 
+* Fix possible leak in stringfn_vformat
 * Added static to internal functions
+* Adding lint checks as part of build
 
 ### v0.1.4 (2021-08-11)
 

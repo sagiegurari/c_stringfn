@@ -640,10 +640,12 @@ char *stringfn_vformat(const char *format, va_list args)
 
   if (length < 0)
   {
+    va_end(args_clone);
     return(NULL);
   }
   if (!length)
   {
+    va_end(args_clone);
     return(stringfn_new_empty_string());
   }
 
