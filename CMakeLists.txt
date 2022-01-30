@@ -1,7 +1,7 @@
 
-cmake_minimum_required (VERSION 3.7)
+cmake_minimum_required(VERSION 3.7)
 
-project (stringfn C)
+project(stringfn C)
 
 # include shared utilities
 if(NOT EXISTS "target/cmake-modules/src/utils.cmake")
