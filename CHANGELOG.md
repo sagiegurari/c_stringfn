@@ -1,5 +1,9 @@
 ## CHANGELOG
 
+### v0.1.6
+
+* Updated header include guard macro name
+
 ### v0.1.5 (2022-01-30)
 
 * Fix possible leak in stringfn_vformat
