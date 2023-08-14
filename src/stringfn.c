@@ -17,7 +17,7 @@ static struct StringFNSubStringIndex _stringfn_get_substring_index(const char *,
 static char *_stringfn_trim(const char *, bool, bool);
 
 
-char *stringfn_new_empty_string()
+char *stringfn_new_empty_string(void)
 {
   char *string = malloc(sizeof(char));
 
