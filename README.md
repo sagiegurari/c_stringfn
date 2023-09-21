@@ -19,6 +19,7 @@ This library provides many string related functions that you always looked for a
 <a name="usage"></a>
 ## Usage
 
+<!-- example source start -->
 ```c
 #include "stringfn.h"
 #include <stdio.h>
@@ -132,6 +133,7 @@ int main()
   return(0);
 } /* main */
 ```
+<!-- example source end -->
 
 ## Contributing
 See [contributing guide](.github/CONTRIBUTING.md)
