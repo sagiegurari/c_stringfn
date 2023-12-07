@@ -1,7 +1,8 @@
 ## CHANGELOG
 
-### v0.1.6
+### v0.1.6 (2023-12-07)
 
+* New stringfn_clone_or_null function
 * Updated header include guard macro name
 
 ### v0.1.5 (2022-01-30)

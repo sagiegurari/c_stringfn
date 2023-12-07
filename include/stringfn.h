@@ -18,6 +18,12 @@ struct StringFNStrings
 char *stringfn_new_empty_string(void);
 
 /**
+ * Duplicates the provided string and returns a clone of it.
+ * If the input is NULL, it will return NULL instead.
+ */
+char *stringfn_clone_or_null(const char *);
+
+/**
  * Returns true if both strings are equal.
  * If any string is NULL, false will be returned.
  */

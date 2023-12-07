@@ -27,6 +27,17 @@ char *stringfn_new_empty_string(void)
 }
 
 
+char *stringfn_clone_or_null(const char *string)
+{
+  if (string == NULL)
+  {
+    return(NULL);
+  }
+
+  return(strdup(string));
+}
+
+
 bool stringfn_equal(const char *string1, const char *string2)
 {
   if (string1 == NULL || string2 == NULL)
@@ -243,7 +254,7 @@ char *stringfn_to_uppercase(const char *string)
     return(NULL);
   }
 
-  char *clone = strdup(string);
+  char *clone = stringfn_clone_or_null(string);
   stringfn_mut_to_uppercase(clone);
 
   return(clone);
@@ -257,7 +268,7 @@ char *stringfn_to_lowercase(const char *string)
     return(NULL);
   }
 
-  char *clone = strdup(string);
+  char *clone = stringfn_clone_or_null(string);
   stringfn_mut_to_lowercase(clone);
 
   return(clone);
@@ -311,7 +322,7 @@ char *stringfn_remove(char *string, char *search)
 
   if (search == NULL)
   {
-    return(strdup(string));
+    return(stringfn_clone_or_null(string));
   }
 
   size_t string_len = strlen(string);
@@ -319,7 +330,7 @@ char *stringfn_remove(char *string, char *search)
 
   if (!string_len || !search_len)
   {
-    return(strdup(string));
+    return(stringfn_clone_or_null(string));
   }
 
   bool   *flags   = malloc(sizeof(bool) * (string_len + 1));
@@ -370,7 +381,7 @@ char *stringfn_replace(const char *string, char source, char target)
     return(NULL);
   }
 
-  char *clone = strdup(string);
+  char *clone = stringfn_clone_or_null(string);
   stringfn_mut_replace(clone, source, target);
 
   return(clone);
